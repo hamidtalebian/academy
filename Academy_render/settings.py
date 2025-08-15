@@ -3,11 +3,10 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'change-me-in-production')
+SECRET_KEY = 'django-insecure-xxxxxxx'  # کلید خودت رو اینجا بذار
+DEBUG = False  # برای Render معمولاً False می‌گذاریم
 
-DEBUG = False
-
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']  # یا فقط دامنه Render
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -16,12 +15,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # اپ‌های خودت را اینجا اضافه کن
-    'courses',
+    # اپ‌های خودت
+    # 'courses',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # اضافه شده برای سرویس استاتیک
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -35,7 +35,7 @@ ROOT_URLCONF = 'Academy_render.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -50,27 +50,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Academy_render.wsgi.application'
 
-# دیتابیس پیش‌فرض (SQLite) - در Render بهتره PostgreSQL استفاده بشه
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3',  # اگر PostgreSQL داری تغییر بده
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 LANGUAGE_CODE = 'en-us'
@@ -78,32 +69,12 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-import os
+# تنظیمات استاتیک
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # محل ذخیره نهایی
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),  # فایل‌های استاتیک پروژه
 ]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-import os
-from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-STATIC_URL = '/static/'
-
-# مسیر برای ذخیره فایل‌های استاتیک در محیط Production
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# اگر فایل‌های استاتیک داخل اپ‌ها داری
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
-
-
-
-
-
