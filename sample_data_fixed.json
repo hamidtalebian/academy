@@ -1,0 +1,40 @@
+[
+  {
+    "model": "courses.teacher",
+    "pk": 1,
+    "fields": {
+      "name": "دکتر علی رضایی",
+      "expertise": "هوش مصنوعی"
+    }
+  },
+  {
+    "model": "courses.teacher",
+    "pk": 2,
+    "fields": {
+      "name": "مهندس سارا محمدی",
+      "expertise": "توسعه وب"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 1,
+    "fields": {
+      "title": "آموزش مقدماتی هوش مصنوعی",
+      "description": "دوره‌ای جامع برای ورود به دنیای AI.",
+      "start_date": "2025-09-01",
+      "end_date": "2025-11-15",
+      "teacher": 1
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 2,
+    "fields": {
+      "title": "توسعه وب با Django",
+      "description": "از صفر تا ساخت وب‌سایت با Django.",
+      "start_date": "2025-10-05",
+      "end_date": "2025-12-20",
+      "teacher": 2
+    }
+  }
+]

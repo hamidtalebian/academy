@@ -1,0 +1,16 @@
+body {
+    font-family: 'Tahoma', sans-serif;
+}
+
+.card-title {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 0.9rem;
+}
+
+h1 {
+    color: #343a40;
+}
