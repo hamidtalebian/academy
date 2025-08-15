@@ -87,6 +87,22 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+STATIC_URL = '/static/'
+
+# مسیر برای ذخیره فایل‌های استاتیک در محیط Production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# اگر فایل‌های استاتیک داخل اپ‌ها داری
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+
 
 
 
