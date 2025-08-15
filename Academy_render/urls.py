@@ -8,5 +8,5 @@ def home(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),  # صفحه اصلی
+    #path('', home),  # صفحه اصلی
 ]
